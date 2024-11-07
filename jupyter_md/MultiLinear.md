@@ -114,3 +114,16 @@ print(results.summary())
     [2] The condition number is large, 3.53e+05. This might indicate that there are
     strong multicollinearity or other numerical problems.
     
+
+最终得到
+**大湾区的GDP多元线性回归模型方程**
+
+**GDP** = **6.2164** × 科研投入 + **0.1391** × 高科技企业数量 + **1.0911** × 出口货值 + **1.9093** × 零售 + **0.9989** × 就业情况 + **12460**
+
+其中：
+- 6.2164 是科研投入的系数。
+- 0.1391 是高科技企业数量的系数。
+- 1.0911 是出口货值的系数。
+- 1.9093 是零售的系数。
+- 0.9989 是就业情况的系数。
+- 12460 是常数项。
