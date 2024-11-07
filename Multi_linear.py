@@ -13,7 +13,7 @@ population_emolpyment_factor_dir = os.path.join(data_dir, '就业情况')
 SciTech_sciinput_factor_dir = os.path.join(data_dir, '科研投入')
 SciTech_scifirm_factor_dir = os.path.join(data_dir, '高新企业数量')
 
-#以年为索引，创建pearson系数最大的五个因素的数据集
+# 以年为索引，创建pearson系数最大的五个因素的数据集
 merged_data = pd.merge(pd.merge(pd.merge(pd.merge(economy_exit_factor[['Year', 'economy_exit_factor']], # 定义出口货物数据列名为'economy_exit_factor'
                                           economy_retail_factor[['Year', 'economy_retail_factor']], # 定义零售数据列名为'economy_retail_factor'
                                           on='Year'),
@@ -62,3 +62,22 @@ print(f"测试集R^2: {test_r2}")
 # 输出模型的系数和截距
 print(f"系数: {model.coef_}")
 print(f"截距: {model.intercept_}")
+
+# 预测模型
+# 假设我们有新的数据点，其中包含五个自变量（因素）的值
+new_data = {
+    'economy_exit_factor': new_economy_exit_value,  # 替换为实际值
+    'economy_retail_factor': new_economy_retail_value,  # 替换为实际值
+    'population_employment_factor': new_population_employment_value,  # 替换为实际值
+    'SciTech_sciinput_factor': new_scitech_sciinput_value,  # 替换为实际值
+    'SciTech_scifirm_factor': new_scitech_scifirm_value  # 替换为实际值
+}
+
+# 将新数据转换为DataFrame格式，以便与模型输入保持一致
+new_data_df = pd.DataFrame([new_data])
+
+# 使用训练好的模型进行预测
+predicted_gdp = model.predict(new_data_df)
+
+# 输出预测结果
+print(f"预测的GDP值: {predicted_gdp[0]}")
