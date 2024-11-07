@@ -4,7 +4,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score
 
-# 数据集路径引入（自变量'出口货物', '零售', '就业情况', '科研投入', '高新企业数量'）
+# 数据集路径引入（相关性分析后选出五个一级自变量：'出口货物', '零售', '就业情况', '科研投入', '高新企业数量'）
 data_dir = os.path.join(os.getcwd(), 'data')
 economy_exit_factor_dir = os.path.join(data_dir, '出口货物')
 economy_retail_factor_dir = os.path.join(data_dir, '零售')
@@ -23,15 +23,15 @@ merged_data = pd.merge(pd.merge(pd.merge(pd.merge(economy_exit_factor[['Year', '
                        SciTech_scifirm_factor[['Year', 'SciTech_scifirm_factor']], # 定义高新企业数量数据列名为'SciTech_scifirm_facto'
                        on='Year')
 
-# 还要加载GDP数据
+# 加载GDP数据
 gdp_data = pd.read_csv(os.path.join(data_dir, 'GDP'))
 merged_data = pd.merge(merged_data, gdp_data[['Year', 'GDP']], on='Year')
 
-# 选择自变量（特征）和因变量（目标）
-X = merged_data[['economy_exit_factor', 'economy_retail_factor', 'population_employment_factor'，'SciTech_sciinput_factor', 'SciTech_scifirm_factor']]  # 自变量（特征）
-y = merged_data['GDP']  # 因变量（目标）
+# 选择自变量（因素）和因变量（GDP）
+X = merged_data[['economy_exit_factor', 'economy_retail_factor', 'population_employment_factor'，'SciTech_sciinput_factor', 'SciTech_scifirm_factor']]  # 自变量（因素）
+y = merged_data['GDP']  # 因变量（GDP）
 
-# 将数据转换为DataFrame格式（可选，但便于查看和处理）
+# 将数据转换为DataFrame格式（便于查看和处理）
 columns = ['economy_exit_factor', 'economy_retail_factor', 'population_employment_factor'，'SciTech_sciinput_factor', 'SciTech_scifirm_factor']
 X_df = pd.DataFrame(X, columns=columns)
 y_df = pd.Series(y, name='Target')
