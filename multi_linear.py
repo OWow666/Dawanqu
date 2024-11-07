@@ -29,7 +29,7 @@ gdp_data = pd.read_csv(os.path.join(data_dir, 'GDP'))
 merged_data = pd.merge(merged_data, gdp_data[['Year', 'GDP']], on='Year')
 
 # 选择自变量（因素）和因变量（GDP）
-X = merged_data[['economy_exit_factor', 'economy_retail_factor', 'population_employment_factor'，'SciTech_sciinput_factor', 'SciTech_scifirm_factor']]  # 自变量（因素）
+X = merged_data[['economy_exit_factor','economy_retail_factor','population_employment_factor','SciTech_sciinput_factor','SciTech_scifirm_factor']]  # 自变量（因素）
 y = merged_data['GDP']  # 因变量（GDP）
 
 # 将数据转换为DataFrame格式（便于查看和处理）
