@@ -47,7 +47,7 @@ model.fit(X_train, y_train)
 y_pred_train = model.predict(X_train)
 y_pred_test = model.predict(X_test)
 
-# 评估模型性能
+# 评估模型性能（使用均方误差MSE和决定系数R^2评估拟合度）
 train_mse = mean_squared_error(y_train, y_pred_train)
 test_mse = mean_squared_error(y_test, y_pred_test)
 train_r2 = r2_score(y_train, y_pred_train)
