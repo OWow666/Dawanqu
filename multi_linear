@@ -12,14 +12,15 @@ population_emolpyment_factor_dir = os.path.join(data_dir, '就业情况')
 SciTech_sciinput_factor_dir = os.path.join(data_dir, '科研投入')
 SciTech_scifirm_factor_dir = os.path.join(data_dir, '高新企业数量')
 
-merged_data = pd.DataFrame({
-    'Year',  # 年份数据
-    'economy_exit_factor_dir',  #出口货物数据
-    'economy_retail_factor_dir',  #零售数据
-    'population_emolpyment_factor_dir',  #就业情况数据
-    'SciTech_sciinput_factor_dir',  #科研投入数据
-    'SciTech_scifirm_factor_dir',  #高新企业数量数据
-    'GDP'  # GDP数据（目标变量）
+merged_data = pd.merge(pd.merge(pd.merge(pd.merge(economy_exit_factor[['Year', 'economy_exit_factor']], # 定义出口货物数据列名为'economy_exit_factor'
+                                          economy_retail_factor[['Year', 'economy_retail_factor']], # 定义零售数据列名为'economy_retail_factor'
+                                          on='Year'),
+                                 population_employment_factor[['Year', 'population_employment_factor']], # 定义就业情况数据列名为'population_employment_factor'
+                                 on='Year'),
+                        SciTech_sciinput_factor[['Year', 'SciTech_sciinput_factor']], # 定义科研投入数据列名为'SciTech_sciinput_factor'
+                        on='Year'),
+                       SciTech_scifirm_factor[['Year', 'high_tech_firms']], # 定义高新企业数量数据列名为'high_tech_firms'
+                       on='Year')
 
 # 选择自变量（特征）和因变量（目标）
 X = merged_data[['Eco', 'Popu', 'Scitec']]  # 自变量（特征）
